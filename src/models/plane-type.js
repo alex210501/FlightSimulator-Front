@@ -34,6 +34,8 @@ class PlaneType {
     }
 }
 
+module.exports = PlaneType;
+
 function main() {
     const jsonData = {
         PK: {
@@ -62,4 +64,6 @@ function main() {
     console.log(PlaneType.fromJson(jsonData));
 }
 
-main();
+if (require.main === module) {
+  main();
+}
