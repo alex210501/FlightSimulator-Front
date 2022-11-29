@@ -1,3 +1,6 @@
+const Route = require('../models/route');
+const Plane = require('../models/plane');
+
 /*
     Default value in case of field missing in the JSON
 */
@@ -22,10 +25,10 @@ class Flight {
         const planeJson = jsonData.Plane?.J ?? {};
 
         return new Flight(
-            jsonData.FlightNumber?.S ?? defaultFlightNumber,
-            routeJson,
+            jsonData.SK?.S ?? defaultFlightNumber,
+            Route.fromJson(routeJson),
             jsonData.DepartureTime?.N ?? defaultDepartureTime,
-            planeJson,
+            Plane.fromJson(planeJson),
             jsonData.Terminal?.N ?? defaultTerminal,
         );
     }
