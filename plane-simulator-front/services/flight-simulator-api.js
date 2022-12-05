@@ -7,6 +7,7 @@ const Plane = require('../models/plane');
 */
 const flightPath = '/flight';
 const planePath = '/plane';
+const flightDepartureTime = `${flightPath}/departuretime`;
 
 /*
     Class that deliver an API to the flight simulator backend
@@ -42,7 +43,26 @@ class FlightSimulatorApi {
             return Plane.fromJson(data);
         } catch(e) {
             console.log(e);
-            return Flight.fromJson({});
+            return Plane.fromJson({});
+        }
+    }
+
+    async getFlightByHour(hour) {
+        const path = `${this.#endpoint}${flightDepartureTime}/${hour}`;
+        let flightArray = [];
+
+        try {
+            const response = await axios.get(path);
+            const data = response.data;
+
+            data.forEach(flight => {
+                flightArray.push(Flight.fromJson(flight));
+            });
+
+            return flightArray;
+        } catch(e) {
+            console.log(e);
+            return flightArray;
         }
     }
 }
@@ -51,8 +71,9 @@ class FlightSimulatorApi {
 async function main() {
     const flightSimulatorApi = new FlightSimulatorApi('http://localhost:8023');
 
-    console.log(await flightSimulatorApi.getFlight(':FR4855'));
-    console.log(await flightSimulatorApi.getPlane(':0'));
+    // console.log(await flightSimulatorApi.getFlight(':FR4855'));
+    // console.log(await flightSimulatorApi.getPlane(':0'));
+    console.log(await flightSimulatorApi.getFlightByHour(':0'));
 }
 
 if (require.main === module) {
