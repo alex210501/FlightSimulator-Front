@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 import MapChart from "./MapChart";
+import Timer from "./time";
 
 function App() {
   return (
-    <div>
-      <MapChart />
+    <div >
+      <div className="timer" ><Timer /></div>
+      <div className ='map'><MapChart /></div>
     </div>
   );
 }
