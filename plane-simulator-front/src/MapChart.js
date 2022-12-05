@@ -12,43 +12,43 @@ import "./styles.css";
 
 const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/continents/europe.json";
 
-
+const city=require('./city.json')
 const flightDestinations = [
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [4.469936, 50.503887], city: "Brussels" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Brussels, city: "Brussels" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [-3.7037902,40.4167754], city: "Madrid" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Madrid, city: "Madrid" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [13.4033203, 52.5195635], city: "Berlin" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Berlin, city: "Berlin" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [2.3524475, 48.8565835], city: "Paris" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Paris, city: "Paris" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [12.4969482, 41.902277], city: "Rome" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Rome, city: "Rome" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [-9.1392517, 38.7224833], city: "Lisbonne" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Lisbonne, city: "Lisbonne" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [10.7528687, 59.9137298], city: "Oslo" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Oslo, city: "Oslo" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [26.1035156, 44.4259344], city: "Bugarest" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Bugarest, city: "Bugarest" },
   },
   {
-    from: { coord: [-0.128, 51.507], city: "London" },
-    to: { coord: [37.6171875, 55.7557135], city: "Moscou" },
+    from: { coord: city.London, city: "London" },
+    to: { coord: city.Moscou, city: "Moscou" },
   },
 ];
 
