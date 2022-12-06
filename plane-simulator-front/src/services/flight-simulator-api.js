@@ -59,7 +59,7 @@ class FlightSimulatorApi {
             data.forEach(flight => {
                 flightArray.push(Flight.fromJson(flight));
             });
-            
+            console.log(flightArray);
             return flightArray;
         } catch(e) {
             console.log("yop");
@@ -76,7 +76,7 @@ async function main() {
 
     // console.log(await flightSimulatorApi.getFlight(':FR4855'));
     // console.log(await flightSimulatorApi.getPlane(':0'));
-    console.log(await flightSimulatorApi.getFlightByHour('0'));
+    console.log(await flightSimulatorApi.getFlightByHour('3600'));
 }
 
 if (require.main === module) {
