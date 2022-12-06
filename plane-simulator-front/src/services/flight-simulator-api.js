@@ -1,4 +1,5 @@
-const axios = require('axios');
+ import axios from 'axios';
+
 const Flight = require('../models/flight');
 const Plane = require('../models/plane');
 
@@ -48,7 +49,7 @@ class FlightSimulatorApi {
     }
 
     async getFlightByHour(hour) {
-        const path = `${this.#endpoint}${flightDepartureTime}/${hour}`;
+        const path = `${this.#endpoint}${flightDepartureTime}/:${hour}`;
         let flightArray = [];
 
         try {
@@ -58,22 +59,24 @@ class FlightSimulatorApi {
             data.forEach(flight => {
                 flightArray.push(Flight.fromJson(flight));
             });
-
+            
             return flightArray;
         } catch(e) {
+            console.log("yop");
             console.log(e);
             return flightArray;
         }
     }
 }
 
+export default FlightSimulatorApi;
 
 async function main() {
     const flightSimulatorApi = new FlightSimulatorApi('http://localhost:8023');
 
     // console.log(await flightSimulatorApi.getFlight(':FR4855'));
     // console.log(await flightSimulatorApi.getPlane(':0'));
-    console.log(await flightSimulatorApi.getFlightByHour(':0'));
+    console.log(await flightSimulatorApi.getFlightByHour('0'));
 }
 
 if (require.main === module) {
