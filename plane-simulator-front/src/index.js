@@ -8,7 +8,7 @@ import Timer from "./time";
 function App() {
   return (
     <div >
-      <div className="timer" ><Timer /></div>
+      
       <div className ='map'><MapChart /></div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   ComposableMap,
   Geographies,
@@ -9,8 +9,11 @@ import {
 } from "react-simple-maps";
 
 import "./styles.css";
+import Timer from "./time";
+import FlightSimulatorApi from "./services/flight-simulator-api";
 
 const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/continents/europe.json";
+
 
 const city=require('./city.json')
 const flightDestinations = [
@@ -52,8 +55,34 @@ const flightDestinations = [
   },
 ];
 
+function jsonToDestination(jsonDestination) {
+  return jsonDestination.map(element => {
+    const departureAirport = element.route.departureAirport;
+    const arrivalAirport = element.route.arrivalAirport;
+    
+    return {
+      from: { coord: city[departureAirport.city], city: departureAirport.name},
+      to: { coord: city[arrivalAirport.city], city: arrivalAirport.name},
+    };
+  });
+}
+
 const MapChart = () => {
+  const [destinations, setDestinations] = useState(flightDestinations);
+
+  const onChange = (time) => {
+    const currentTime = time.$H*3600 + time.$m*60 + time.$s;
+    const flightSimulatorApi = new FlightSimulatorApi('http://localhost:8023');
+
+    flightSimulatorApi.getFlightByHour(currentTime).then((result) => {
+      setDestinations(jsonToDestination(result));
+    });
+  };
+
   return (
+    <div>
+    <div className="timer"><Timer onChange={onChange}/></div>
+
     <ComposableMap
       projection="geoAzimuthalEqualArea"
       projectionConfig={{
@@ -75,7 +104,7 @@ const MapChart = () => {
         }
       </Geographies>
 
-    {flightDestinations.map((route) => (
+    {destinations.map((route) => (
       <>
         <Line
           key={route.to.city}
@@ -94,7 +123,7 @@ const MapChart = () => {
           </Annotation>
         </>
     ))}
-    {flightDestinations.map((route) => (
+    {destinations.map((route) => (
       <>
         <Marker coordinates={route.from.coord}>
           <circle r={2} fill="yellow" />
@@ -102,9 +131,8 @@ const MapChart = () => {
         </Marker>
       </>
     ))}
-    
-
   </ComposableMap> 
+  </div>
 
 
   );
