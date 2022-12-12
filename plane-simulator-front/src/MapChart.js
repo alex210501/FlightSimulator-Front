@@ -36,11 +36,11 @@ const flightDestinations = [
   },
   {
     from: { coord: city.London, city: "London" },
-    to: { coord: city.Rome, city: "Rome" },
+    to: { coord: city.Roma, city: "Roma" },
   },
   {
     from: { coord: city.London, city: "London" },
-    to: { coord: city.Lisbonne, city: "Lisbonne" },
+    to: { coord: city.Lisbon, city: "Lisbon" },
   },
   {
     from: { coord: city.London, city: "London" },
